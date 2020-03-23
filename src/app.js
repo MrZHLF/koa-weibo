@@ -37,7 +37,7 @@ app.use(
 )
 
 // session 配置
-app.keys = ['UIsdf5151515']
+app.keys = ['UIsdf5151515&$#']
 app.use(
   session({
     key: 'weibo.sid', // cookie name 默认是 `koa.sid`

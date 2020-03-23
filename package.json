@@ -20,17 +20,20 @@
     "debug": "^4.1.1",
     "ejs": "^3.0.1",
     "jade": "^1.11.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-ejs": "^4.3.0",
     "koa-json": "^2.0.2",
+    "koa-jwt": "^3.6.0",
     "koa-logger": "^3.2.1",
     "koa-onerror": "^4.1.0",
     "koa-redis": "^4.0.1",
     "koa-router": "^8.0.8",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.1",
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.1.0",
+    "redis": "^3.0.2"
   },
   "dependencies": {
     "babel-eslint": "^10.1.0",

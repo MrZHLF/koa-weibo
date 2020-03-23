@@ -1,3 +1,8 @@
+/**
+ * @description 存储配置
+ * @author 小周
+ */
+
 const {
     isProd
 } = require('../utils/env')
@@ -26,7 +31,7 @@ if (isProd) {
         // 线上的 mysql 配置
         host: 'localhost',
         user: 'root',
-        password: 'Mysql_2018',
+        password: '123456',
         port: '3306',
         database: 'koa2_weibo_db'
     }
