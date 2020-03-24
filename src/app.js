@@ -15,10 +15,14 @@ const {
 const {
   isProd
 } = require('./utils/env')
+const {
+  SESSION_SECRET_KEY
+} = require('./conf/secretKeys')
 // 引入路由
 
 const index = require('./routes/index')
-const users = require('./routes/users')
+const userViewRouter = require('./routes/view/user')
+const userApiRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
 // 错误警告
 let onerrorConf = {}
@@ -37,7 +41,7 @@ app.use(
 )
 
 // session 配置
-app.keys = ['UIsdf5151515&$#']
+app.keys = [SESSION_SECRET_KEY]
 app.use(
   session({
     key: 'weibo.sid', // cookie name 默认是 `koa.sid`
@@ -64,7 +68,8 @@ app.use(require('koa-static')(__dirname + '/public'))
 // 定义路由  注册
 
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+app.use(userViewRouter.routes(), userViewRouter.allowedMethods()) //用户登录注册路由
+app.use(userApiRouter.routes(), userApiRouter.allowedMethods()) //用户登录注册API
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404路由注册最下面
 // error-handling
 app.on('error', (err, ctx) => {
