@@ -8,10 +8,15 @@ const {
     register
 } = require('../../controller/user')
 router.prefix('/api/user')
+const userValidate = require('./../../validator/user')
 
+// 引入中间件
+const {
+    genValidator
+} = require('./../../middlewares/validator')
 
 //注册接口
-router.post('/register', async (ctx, next) => {
+router.post('/register', genValidator(userValidate), async (ctx, next) => {
     const {
         userName,
         password,

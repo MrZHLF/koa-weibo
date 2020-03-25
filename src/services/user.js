@@ -61,7 +61,7 @@ async function createUser({
         nickName: nickName ? nickName : userName,
         gender
     })
-    return result
+    return result.dateValues
 }
 
 
