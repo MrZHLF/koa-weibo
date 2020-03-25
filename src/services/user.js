@@ -21,7 +21,6 @@ async function getUserInfo(userName, password) {
         userName
     }
     if (password) {
-        // 如果传的有password 
         Object.assign(whereOpt, {
             password
         })
@@ -33,14 +32,15 @@ async function getUserInfo(userName, password) {
         where: whereOpt
     })
     if (result == null) {
-        // 没有找到
+        // 未找到
         return result
     }
+
     // 格式化
-    const formatRes = formatUser(result.dateValues)
+    const formatRes = formatUser(result.dataValues)
+
     return formatRes
 }
-
 
 /**
  * 创建用户
@@ -61,7 +61,7 @@ async function createUser({
         nickName: nickName ? nickName : userName,
         gender
     })
-    return result.dateValues
+    return result.dataValues
 }
 
 
