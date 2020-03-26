@@ -8,7 +8,7 @@ const bodyparser = require('koa-bodyparser')
 const path = require('path')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
-
+const koaStatic = require('koa-static')
 const {
   REDIS_CONF
 } = require('./conf/db')
@@ -21,6 +21,7 @@ const {
 // 引入路由
 
 const index = require('./routes/index')
+const utilsAPIRouter = require('./routes/api/utlils')
 const userViewRouter = require('./routes/view/user')
 const userApiRouter = require('./routes/api/user')
 const errorViewRouter = require('./routes/view/error')
@@ -64,12 +65,14 @@ app.use(
 )
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(koaStatic(__dirname + '/public'))
+app.use(koaStatic(path.join(__dirname, '..', 'uploadFiles')))
 // 定义路由  注册
 
 app.use(index.routes(), index.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods()) //用户登录注册路由
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods()) //用户登录注册API
+app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods()) //图片上传API
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404路由注册最下面
 // error-handling
 app.on('error', (err, ctx) => {
