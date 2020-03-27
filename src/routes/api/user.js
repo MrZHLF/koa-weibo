@@ -8,7 +8,9 @@ const {
     register,
     login,
     deleteCurUser,
-    changeInfo
+    changeInfo,
+    changePassword,
+    logout
 } = require('../../controller/user')
 router.prefix('/api/user')
 const userValidate = require('./../../validator/user')
@@ -92,6 +94,14 @@ router.patch('/changePassword', loginCheck, genValidator(userValidate), async (c
     const {
         userName
     } = ctx.session.userInfo
+
+    ctx.body = await changePassword(userName, password, newPassword)
+})
+
+
+//退出登录
+router.post('/logout', loginCheck, async (ctx, next) => {
+    ctx.body = await logout(ctx)
 })
 
 module.exports = router
