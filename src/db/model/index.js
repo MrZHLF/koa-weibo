@@ -3,7 +3,8 @@
  * @author 小周
  */
 const User = require('./Usre')
-
+const Blog = require('./Blog')
 module.exports = {
-    User
+    User,
+    Blog
 }
