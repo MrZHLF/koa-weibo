@@ -35,13 +35,24 @@
         <div class="col-4">
             <!-- 个人信息 -->
             <div class="right-item">
-                <!-- <%- include('widgets/user-info', { -->
-                <!-- userInfo: userData.userInfo, -->
-                <!-- isMe: userData.isMe, -->
-                <!-- amIFollowed: userData.amIFollowed, -->
+                <%- include('widgets/user-info', {
+                userInfo: userData.userInfo,
+                isMe: userData.isMe,
+                amIFollowed: userData.amIFollowed,
                 <!-- atCount: userData.atCount -->
-                <!-- });%> -->
+                });%>
             </div>
+            <!-- 粉丝 -->
+            <%- include('widgets/fans', {
+                count: userData.fansData.count,
+                userList: userData.fansData.list
+            })%>
+
+            <!-- 关注 -->
+            <%- include('widgets/followers', {
+                count: userData.followersData.count,
+                userList: userData.followersData.list
+            })%>
         </div> <!-- 右侧结束 -->
     </div>
 </div>
