@@ -19,6 +19,8 @@ const {
   SESSION_SECRET_KEY
 } = require('./conf/secretKeys')
 // 引入路由
+const blogSquareAPIRouter = require('./routes/api/blog-square')
+const profileAPIRouter = require('./routes/api/blog.profile')
 const blogHomeAPIRouter = require('./routes/api/blog-home')
 const blogViewRouter = require('./routes/view/blog')
 const utilsAPIRouter = require('./routes/api/utlils')
@@ -70,9 +72,11 @@ app.use(koaStatic(path.join(__dirname, '..', 'uploadFiles')))
 // 定义路由  注册
 
 
+app.use(blogSquareAPIRouter.routes(), blogSquareAPIRouter.allowedMethods()) //博客路由
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods()) //博客路由
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods()) //用户登录注册路由
 app.use(blogHomeAPIRouter.routes(), blogHomeAPIRouter.allowedMethods()) //博客首页API
+app.use(profileAPIRouter.routes(), profileAPIRouter.allowedMethods()) //个人首页路由
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods()) //用户登录注册API
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods()) //图片上传API
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) // 404路由注册最下面
