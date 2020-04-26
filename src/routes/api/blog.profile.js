@@ -21,14 +21,16 @@ const {
 
 // 加载更多
 router.get('/loadMore/:userName/:pageIndex', loginCheck, async (ctx, next) => {
-    const {
+    let {
         userName,
         pageIndex
-    } = ctx.params;
+    } = ctx.params
     pageIndex = parseInt(pageIndex)
     const result = await getProfileBlogList(userName, pageIndex)
 
+    // 渲染为 html 字符串
     result.data.blogListTpl = getBlogListStr(result.data.blogList)
+
     ctx.body = result
 })
 

@@ -5,7 +5,7 @@
 const server = require('../server')
 
 const {
-    COOKIE
+    Z_COOKIE
 } = require('./../testUserinfo')
 
 //存储微博id
@@ -20,7 +20,7 @@ test('创建一个微博,成功 ', async () => {
     const res = await server.post('/api/blog/create').send({
         content,
         image
-    }).set('cookie', COOKIE)
+    }).set('cookie', Z_COOKIE)
     expect(res.body.errno).toBe(0)
     expect(res.body.data.content).toBe(content)
     expect(res.body.data.image).toBe(image)

@@ -19,7 +19,8 @@ const {
 } = require('./../../controller/blog-square')
 
 const {
-    getFans
+    getFans,
+    getFollowers
 } = require('./../../controller/user-relation') //粉丝
 
 
@@ -79,8 +80,12 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
         fansList
     } = fansResult.data
 
-
-
+    // 获取关注人列表
+    const follwerResult = await getFollowers(curUserInfo.id)
+    const {
+        count: followersCount,
+        followersList
+    } = follwerResult.data
 
     //我是否关注了此人
     const amIFollowed = fansList.some(item => {
@@ -101,6 +106,10 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
             fansData: {
                 count: fansCount,
                 list: fansList
+            },
+            followersData: {
+                count: followersCount,
+                list: followersList
             },
             amIFollowed
         }

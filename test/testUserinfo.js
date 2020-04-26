@@ -4,6 +4,13 @@
  */
 
 module.exports = {
-    USER_NAME: "xiaozhou",
-    COOKIE: 'weibo.sid=ppkM8wNI_epPDSCNEj-p2Vx0dKpURuYr; weibo.sid.sig=bdeUoRvQHKbU7kVMVXay8v2d2jI'
+    Z_ID: 1,
+    Z_USER_NAME: "xiaozhou",
+    Z_COOKIE: 'weibo.sid=Dqig_A-J9H5pRGxtwHdKxV7q3E9fbOGn; weibo.sid.sig=IOf9VDdcB3yQlBssk9ImeeObAis',
+
+
+
+    L_ID: 2,
+    L_USER_NAME: 'lisi',
+    L_COOKIE: 'weibo.sid=PYkKIuz_0j9ayoAtNTFMvSxrS3SA2-bR; weibo.sid.sig=YQz7wP17sKcJJryNfyC4Nl8Lu3E'
 }

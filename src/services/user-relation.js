@@ -62,9 +62,15 @@ async function getFollowersByUser(userId) {
 
     let userList = result.rows.map(row => row.dataValues)
     userList = userList.map(item => {
-        item.user
+        let user = item.user
+        user = user.dataValues
+        user = formatUser(user)
+        return user
     })
-    return userList
+    return {
+        count: result.count,
+        userList
+    }
 }
 
 /**
