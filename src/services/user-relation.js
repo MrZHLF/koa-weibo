@@ -11,6 +11,7 @@ const {
 const {
     formatUser
 } = require('./_format')
+const Sequelize = require('sequelize')
 
 /**
  * 获取关注该用户的用户列表，即该用户的粉丝
@@ -25,7 +26,10 @@ async function getUsersByFollower(followerId) {
         include: [{
             model: UserRelation,
             where: {
-                followerId
+                followerId,
+                userId: {
+                    [Sequelize.Op.ne]: followerId
+                }
             }
         }]
     })
@@ -42,6 +46,7 @@ async function getUsersByFollower(followerId) {
     }
 }
 
+// [Sequelize.Op.ne]   不等于
 /**
  * 获取关注人列表
  * @param {number} userId 用户id
@@ -56,7 +61,10 @@ async function getFollowersByUser(userId) {
             attributes: ['id', 'userName', 'nickName', 'picture'],
         }],
         where: {
-            userId
+            userId,
+            followerId: {
+                [Sequelize.Op.ne]: userId
+            }
         }
     })
 

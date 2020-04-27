@@ -19,6 +19,7 @@ const {
     unFollow
 } = require('./../../controller/user-relation')
 
+
 // 加载更多
 router.get('/loadMore/:userName/:pageIndex', loginCheck, async (ctx, next) => {
     let {
@@ -34,7 +35,6 @@ router.get('/loadMore/:userName/:pageIndex', loginCheck, async (ctx, next) => {
     ctx.body = result
 })
 
-
 // 关注
 router.post('/follow', loginCheck, async (ctx, next) => {
     const {
@@ -45,6 +45,7 @@ router.post('/follow', loginCheck, async (ctx, next) => {
     } = ctx.request.body
     ctx.body = await follow(myUserId, curUserId)
 })
+
 // 取消关注
 router.post('/unFollow', loginCheck, async (ctx, next) => {
     const {
