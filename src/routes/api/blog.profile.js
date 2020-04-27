@@ -9,16 +9,16 @@ const {
 } = require('../../middlewares/loginChecks')
 const {
     getProfileBlogList
-} = require('./../../controller/blog-profile')
-const {
-    getBlogListStr
-} = require('../../utils/blog')
-router.prefix('/api/profile')
+} = require('../../controller/blog-profile')
 const {
     follow,
     unFollow
-} = require('./../../controller/user-relation')
+} = require('../../controller/user-relation')
+const {
+    getBlogListStr
+} = require('../../utils/blog')
 
+router.prefix('/api/profile')
 
 // 加载更多
 router.get('/loadMore/:userName/:pageIndex', loginCheck, async (ctx, next) => {

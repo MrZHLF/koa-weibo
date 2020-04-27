@@ -5,7 +5,6 @@
 const {
     User
 } = require('../db/model/index')
-
 const {
     formatUser
 } = require('./_format')
@@ -14,7 +13,7 @@ const {
 } = require('./user-relation')
 
 /**
- *获取用户信息
+ * 获取用户信息
  * @param {string} userName 用户名
  * @param {string} password 密码
  */
@@ -64,13 +63,13 @@ async function createUser({
         nickName: nickName ? nickName : userName,
         gender
     })
-
     const data = result.dataValues
-    // 自己关注自己
+
+    // 自己关注自己（为了方便首页获取数据）
     addFollower(data.id, data.id)
+
     return data
 }
-
 
 /**
  * 删除用户
@@ -82,13 +81,14 @@ async function deleteUser(userName) {
             userName
         }
     })
+    // result 删除的行数
     return result > 0
 }
 
 /**
- *  修改用户信息
- * @param {Object} param0 修改的内容{newPassword，newNickName，newPicture，newCity}
- * @param {Object} param1 查询条件{ userName， password }
+ * 更新用户信息
+ * @param {Object} param0 要修改的内容 { newPassword, newNickName, newPicture, newCity }
+ * @param {Object} param1 查询条件 { userName, password }
  */
 async function updateUser({
     newPassword,
@@ -99,7 +99,7 @@ async function updateUser({
     userName,
     password
 }) {
-    // 拼接修改的内容
+    // 拼接修改内容
     const updateData = {}
     if (newPassword) {
         updateData.password = newPassword
@@ -121,13 +121,13 @@ async function updateUser({
     if (password) {
         whereData.password = password
     }
+
     // 执行修改
     const result = await User.update(updateData, {
         where: whereData
     })
-    return result[0] > 0
+    return result[0] > 0 // 修改的行数
 }
-
 
 module.exports = {
     getUserInfo,

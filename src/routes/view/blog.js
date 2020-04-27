@@ -3,29 +3,32 @@
  * @author 小周
  */
 
+const router = require('koa-router')()
 const {
     loginRedirect
 } = require('../../middlewares/loginChecks')
-
-const {
-    isExist
-} = require('../../controller/user')
-const router = require('koa-router')()
 const {
     getProfileBlogList
 } = require('../../controller/blog-profile')
 const {
     getSquareBlogList
-} = require('./../../controller/blog-square')
-
+} = require('../../controller/blog-square')
+const {
+    isExist
+} = require('../../controller/user')
 const {
     getFans,
     getFollowers
-} = require('./../../controller/user-relation') //粉丝
-
+} = require('../../controller/user-relation')
 const {
     getHomeBlogList
 } = require('../../controller/blog-home')
+
+// const {
+//     getAtMeCount,
+//     getAtMeBlogList,
+//     markAsRead
+// } = require('../../controller/blog-at')
 
 // 首页
 router.get('/', loginRedirect, async (ctx, next) => {
@@ -58,6 +61,12 @@ router.get('/', loginRedirect, async (ctx, next) => {
         followersList
     } = followersResult.data
 
+    // 获取 @ 数量
+    // const atCountResult = await getAtMeCount(userId)
+    // const {
+    //     count: atCount
+    // } = atCountResult.data
+
     await ctx.render('index', {
         userData: {
             userInfo,
@@ -68,7 +77,7 @@ router.get('/', loginRedirect, async (ctx, next) => {
             followersData: {
                 count: followersCount,
                 list: followersList
-            },
+            }
         },
         blogData: {
             isEmpty,
@@ -139,6 +148,12 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     const amIFollowed = fansList.some(item => {
         return item.userName === myUserName
     })
+
+    // 获取 @ 数量
+    // const atCountResult = await getAtMeCount(myUserInfo.id)
+    // const {
+    //     count: atCount
+    // } = atCountResult.data
 
     await ctx.render('profile', {
         blogData: {

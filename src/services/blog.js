@@ -2,21 +2,19 @@
  * @description blog services
  * @author 小周
  */
-
 const {
     Blog,
     User,
     UserRelation
 } = require('../db/model/index')
-
 const {
     formatUser,
     formatBlog
 } = require('./_format')
 
 /**
- *  创建微博数据
- * @param {Object} param0 创建微博数据 {userId,content,image}
+ * 创建微博
+ * @param {Object} param0 创建微博的数据 { userId, content, image }
  */
 async function createBlog({
     userId,
@@ -78,8 +76,6 @@ async function getBlogListByUser({
         blogList
     }
 }
-
-
 
 /**
  * 获取关注着的微博列表（首页）
