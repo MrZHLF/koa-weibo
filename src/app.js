@@ -19,6 +19,7 @@ const {
   SESSION_SECRET_KEY
 } = require('./conf/secretKeys')
 // 引入路由
+const atAPIRouter = require('./routes/api/blog-at')
 const blogSquareAPIRouter = require('./routes/api/blog-square')
 const profileAPIRouter = require('./routes/api/blog.profile')
 const blogHomeAPIRouter = require('./routes/api/blog-home')
@@ -71,7 +72,7 @@ app.use(koaStatic(__dirname + '/public'))
 app.use(koaStatic(path.join(__dirname, '..', 'uploadFiles')))
 // 定义路由  注册
 
-
+app.use(atAPIRouter.routes(), atAPIRouter.allowedMethods()) //at Api
 app.use(blogSquareAPIRouter.routes(), blogSquareAPIRouter.allowedMethods()) //博客路由
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods()) //博客路由
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods()) //用户登录注册路由

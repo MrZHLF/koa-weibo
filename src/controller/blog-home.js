@@ -21,9 +21,9 @@ const {
 const {
     getUserInfo
 } = require('../services/user')
-// const {
-//     createAtRelation
-// } = require('../services/at-relation')
+const {
+    createAtRelation
+} = require('../services/at-relation')
 
 /**
  * 创建微博
@@ -47,12 +47,12 @@ async function create({
     )
 
     // 根据 @ 用户名查询用户信息
-    // const atUserList = await Promise.all(
-    //     atUserNameList.map(userName => getUserInfo(userName))
-    // )
+    const atUserList = await Promise.all(
+        atUserNameList.map(userName => getUserInfo(userName))
+    )
 
     // // 根据用户信息，获取用户 id
-    // const atUserIdList = atUserList.map(user => user.id)
+    const atUserIdList = atUserList.map(user => user.id)
 
     try {
         // 创建微博
@@ -63,9 +63,9 @@ async function create({
         })
 
         // 创建 @ 关系
-        // await Promise.all(atUserIdList.map(
-        //     userId => createAtRelation(blog.id, userId)
-        // ))
+        await Promise.all(atUserIdList.map(
+            userId => createAtRelation(blog.id, userId)
+        ))
 
         // 返回
         return new SuccessModel(blog)
